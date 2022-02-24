@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminUsersController extends Controller
 {
@@ -21,7 +22,9 @@ class AdminUsersController extends Controller
     public function index()
     {
         //
-        $users = User::all();
+        //$users = User::all();//eloquent way ORM
+
+        $users = DB::table('users')->get();//query builder
 
         return view('admin.users.index', compact('users'));
     }
