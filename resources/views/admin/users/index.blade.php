@@ -21,21 +21,27 @@
 
             <tbody>
 
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
+                @foreach($users as $user)
+
+                    <tr>
+                        <td>{{$user->id}}</td>
+                        <td>{{$user->photo_id}}</td>
+                        <td>{{$user->name}}</td>
+                        <td>{{$user->email}}</td>
+
+                        <td>{{$user->role_id ? $user->role->name : 'none'}}</td>
+                        <td>{{$user->is_active ? 'Active' : 'Not Active'}}</td>
+
+                        <td>{{$user->created_at->diffForHumans()}}</td>
+                        <td>{{$user->updated_at->diffForHumans()}}</td>
+                    </tr>
+
+                @endforeach
 
             </tbody>
 
     </table>
 
+    {{$users->links()}}
+
 @endsection
-
-{{--@foreach($users as $user)
-
-    {{$user->name}}
-
-@endforeach--}}
