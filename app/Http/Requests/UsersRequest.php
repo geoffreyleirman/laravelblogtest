@@ -27,7 +27,9 @@ class UsersRequest extends FormRequest
             //
             'name'=>'required|string|max:255',
             'email'=>'required|email|unique:users',
-            'role_id'=>'required',
+
+            'roles'=>'required',
+
             'is_active'=>'required',
             'password'=>'required'
         ];

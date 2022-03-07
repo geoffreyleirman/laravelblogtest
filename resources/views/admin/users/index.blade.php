@@ -29,7 +29,12 @@
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
 
-                        <td>{{$user->role_id ? $user->role->name : 'none'}}</td>
+                        <td>
+                            @foreach($user->roles as $role)
+                                <span class="badge rounded-pill bg-info text-dark">{{$role->name}}</span>
+                            @endforeach
+                        </td>
+
                         <td>{{$user->is_active ? 'Active' : 'Not Active'}}</td>
 
                         <td>{{$user->created_at->diffForHumans()}}</td>
