@@ -48,7 +48,7 @@
                         <td>{{$user->created_at->diffForHumans()}}</td>
                         <td>{{$user->updated_at->diffForHumans()}}</td>
 
-                        <td>{{$user->photo ? $user->photo->file : 'niks'}}</td>
+                        <td>{{$user->photo ? $user->photo->file : 'no existing location'}}</td>
                     </tr>
 
                 @endforeach
