@@ -25,4 +25,5 @@ Auth::routes();
 Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
     Route::get('', [App\Http\Controllers\HomeController::class, 'index'])->name('homebackend');
     Route::resource('users', App\Http\Controllers\AdminUsersController::class);
+    Route::resource('photos', App\Http\Controllers\AdminPhotosController::class);
 });

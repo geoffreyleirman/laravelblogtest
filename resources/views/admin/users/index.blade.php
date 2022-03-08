@@ -16,6 +16,7 @@
                     <th scope="col">Active</th>
                     <th scope="col">Created</th>
                     <th scope="col">Updated</th>
+                    <th scope="col">Location</th>
                 </tr>
             </thead>
 
@@ -25,7 +26,14 @@
 
                     <tr>
                         <td>{{$user->id}}</td>
-                        <td>{{$user->photo_id}}</td>
+
+                        <td>
+                            <img src="{{$user->photo ? asset($user->photo->file): 'http://via.placeholder.com/62'}}"
+                                 alt="{{$user->name}}"
+                                 height="62"
+                                 width="auto">
+                        </td>
+
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
 
@@ -39,6 +47,8 @@
 
                         <td>{{$user->created_at->diffForHumans()}}</td>
                         <td>{{$user->updated_at->diffForHumans()}}</td>
+
+                        <td>{{$user->photo ? $user->photo->file : 'niks'}}</td>
                     </tr>
 
                 @endforeach
