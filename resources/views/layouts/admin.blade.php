@@ -27,19 +27,14 @@
     <!-- Navbar-->
     <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
 
-
-
-
-
-
-
-
-
-
-
         <li class="nav-item dropdown">
             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                <i class="fas fa-user-circle"></i> {{ Auth::user()->name }}
+
+
+
+                <i class="fas fa-user-circle"></i>
+
+                {{ Auth::user()->name }}
             </a>
 
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -126,12 +121,15 @@
                     </a>
                 </div>
             </div>
+
             <div class="sb-sidenav-footer">
+
                 <div class="small">Logged in as:</div>
 
                 {{ Auth::user()->name }}
 
             </div>
+
         </nav>
     </div>
     <div id="layoutSidenav_content">

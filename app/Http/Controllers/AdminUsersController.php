@@ -6,6 +6,7 @@ use App\Http\Requests\UsersEditRequest;
 use App\Http\Requests\UsersRequest;
 use App\Models\Photo;
 use App\Models\Role;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -31,8 +32,9 @@ class AdminUsersController extends Controller
         //$users = User::all();//eloquent way ORM
 
         //$users = User::orderBy('id', 'desc')->paginate(15);
+        //$users=User::withTrashed()->paginate(15);
 
-        $users=User::withTrashed()->paginate(15);
+        $users=User::withTrashed()->orderBy('id', 'desc')->paginate(15);
 
         //$users = DB::table('users')->get();//query builder
 
@@ -163,16 +165,25 @@ class AdminUsersController extends Controller
     public function destroy($id)
     {
         //
+        //User::findOrFail($id)->delete();//chaining
         $user = User::findOrFail($id);
         $user->delete();
 
-        Session::flash('user_message', $user->name . ' was deleted!');
+        Session::flash('user_message', $user->name . ' has been deleted!');
+
 
         return redirect('/admin/users');
     }
 
     public function restore($id){
-        User::onlyTrashed()->where('id', $id)->restore();
+        //dd($id);
+        //User::onlyTrashed()->where('id', $id)->restore();
+
+        $user = User::onlyTrashed()->whereId($id)->first();
+        $user->restore();
+
+        Session::flash('user_message', $user->name . ' has been restored!');
+
         return redirect('/admin/users');
     }
 
