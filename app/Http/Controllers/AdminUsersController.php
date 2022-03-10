@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class AdminUsersController extends Controller
 {
@@ -29,7 +30,9 @@ class AdminUsersController extends Controller
         //
         //$users = User::all();//eloquent way ORM
 
-        $users = User::orderBy('id', 'desc')->paginate(15);
+        //$users = User::orderBy('id', 'desc')->paginate(15);
+
+        $users=User::withTrashed()->paginate(15);
 
         //$users = DB::table('users')->get();//query builder
 
@@ -160,5 +163,17 @@ class AdminUsersController extends Controller
     public function destroy($id)
     {
         //
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        Session::flash('user_message', $user->name . ' was deleted!');
+
+        return redirect('/admin/users');
     }
+
+    public function restore($id){
+        User::onlyTrashed()->where('id', $id)->restore();
+        return redirect('/admin/users');
+    }
+
 }
