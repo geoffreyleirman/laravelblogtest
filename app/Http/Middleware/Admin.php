@@ -21,7 +21,7 @@ class Admin
             if(Auth::user()->isAdmin()){//controle zijn of user admin is
                 return $next($request);
             }
-            return redirect('admin/users');
+            //return redirect('admin/users');
         }
         return redirect('/');
     }

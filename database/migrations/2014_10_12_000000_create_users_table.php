@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
 
             //$table->integer('role_id')->unsigned()->nullable()->index();//Method Chaining - Verschillende codes in één keer meegeven
-            $table->integer('is_active')->default(0);//Bestaat de gebruiker nog?
+            $table->integer('is_active')->default(1);//Bestaat de gebruiker nog?
 
             $table->string('name');
             $table->string('email')->unique();
