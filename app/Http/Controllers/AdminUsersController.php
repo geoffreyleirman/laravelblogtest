@@ -29,14 +29,8 @@ class AdminUsersController extends Controller
     public function index()
     {
         //
-        //$users = User::all();//eloquent way ORM
-
-        //$users = User::orderBy('id', 'desc')->paginate(15);
-        //$users=User::withTrashed()->paginate(15);
 
         $users=User::withTrashed()->orderBy('id', 'desc')->paginate(15);
-
-        //$users = DB::table('users')->get();//query builder
 
         return view('admin.users.index', compact('users'));
     }

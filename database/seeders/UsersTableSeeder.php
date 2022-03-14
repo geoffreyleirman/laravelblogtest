@@ -20,7 +20,6 @@ class UsersTableSeeder extends Seeder
         //
         DB::table('users')->insert([
             'is_active'=>1,
-            //'role_id'=>1,
             'name'=>'Geoffrey',
             'email'=>'geoffrey.leirman@gmail.com',
             'email_verified_at'=> Carbon::now()->format('Y-m-d H:i:s'),

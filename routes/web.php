@@ -22,9 +22,7 @@ Route::get('/contactformulier','App\Http\Controllers\ContactController@create');
 Route::post('/contactformulier', 'App\Http\Controllers\ContactController@store');
 
 
-//verify zorgt ervoor dat enkel een geverifieerde user wordt toegelaten aan de geauthenticeerde routes
-Auth::routes(['verify'=>true]);
-
+Auth::routes(['verify'=>true]);//verify zorgt ervoor dat enkel een geverifieerde user wordt toegelaten aan de geauthenticeerde routes
 
 /*BACKEND ROUTES*/
 
