@@ -12,7 +12,6 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
-
     use softDeletes;
 
     /**
@@ -25,7 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'photo_id',
-        'password',
+        'password'
     ];
 
     /**
@@ -50,17 +49,19 @@ class User extends Authenticatable implements MustVerifyEmail
     public function roles(){
         return $this->belongsToMany(Role::class, 'user_role');
     }
-
     public function photo(){
         return $this->belongsTo(Photo::class);
     }
+    public function posts(){
+        return $this->hasMany(Post::class);
+        // return $this->hasMany('App\Models\Post');
+    }
 
     public function isAdmin(){
-        foreach ($this->roles as $role){
+        foreach($this->roles as $role){
             if($role->name == 'administrator' && $this->is_active == 1){
                 return true;
             }
         }
     }
 }
-

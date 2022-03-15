@@ -68,6 +68,8 @@
                         Dashboard
                     </a>
                     <div class="sb-sidenav-menu-heading">Interface</div>
+
+                    <!-- Users - Nav Collapse -->
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                         Users
@@ -79,6 +81,33 @@
                             <a class="nav-link" href="{{route('users.create')}}">Create User</a>
                         </nav>
                     </div>
+
+                    <!-- Media - Nav Collapse -->
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-images"></i></div>
+                        Media
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{{route('media.index')}}">All Media</a>
+                            <a class="nav-link" href="{{route('media.create')}}">Create Media</a>
+                        </nav>
+                    </div>
+
+                    <!-- Posts - Nav Collapse -->
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-blog"></i></div>
+                        Posts
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{{route('posts.index')}}">All Posts</a>
+                            <a class="nav-link" href="{{route('posts.create')}}">Create Post</a>
+                        </nav>
+                    </div>
+
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                         <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                         Pages

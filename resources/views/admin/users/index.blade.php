@@ -14,7 +14,7 @@
             <div class="alert alert-info alert-dismissible fade show d-flex align-items-center" role="alert">
                 <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
 
-                <p>{{session('user_message')}}</p>
+                <div>{{session('user_message')}}</div>
 
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>

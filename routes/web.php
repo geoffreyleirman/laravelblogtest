@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,23 +16,30 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
+
 });
 
 
-Route::get('/contactformulier','App\Http\Controllers\ContactController@create');
+Route::get('/contactformulier', 'App\Http\Controllers\ContactController@create');
 Route::post('/contactformulier', 'App\Http\Controllers\ContactController@store');
 
 
-Auth::routes(['verify'=>true]);//verify zorgt ervoor dat enkel een geverifieerde user wordt toegelaten aan de geauthenticeerde routes
+//verify zorgt ervoor dat enkel een geverifieerde user wordt toegelaten
+//aan de geautentiseerde routes
+Auth::routes(['verify'=>true]);
 
-/*BACKEND ROUTES*/
 
-Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
-    Route::resource('users', App\Http\Controllers\AdminUsersController::class);
+/***BACKEND ROUTES***/
+
+Route::group(['prefix' => 'admin', 'middleware'=> 'admin'], function(){
+    Route::resource('users',App\Http\Controllers\AdminUsersController::class);
     Route::get('users/restore/{user}', 'App\Http\Controllers\AdminUsersController@restore')->name('users.restore');
 });
 
-Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
+Route::group(['prefix' => 'admin', 'middleware'=> ['auth','verified']], function(){
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('homebackend');
-    Route::resource('photos', App\Http\Controllers\AdminPhotosController::class);
+    Route::resource('photos',App\Http\Controllers\AdminPhotosController::class);
+    Route::resource('media',App\Http\Controllers\AdminMediasController::class);
+    Route::resource('posts', App\Http\Controllers\AdminPostsController::class);
 });
+
