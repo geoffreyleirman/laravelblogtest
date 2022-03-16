@@ -18,6 +18,7 @@ class AdminPostsController extends Controller
         //
         $posts = Post::paginate(15);
         Session::flash('user_message', 'No posts found');
+
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -86,5 +87,12 @@ class AdminPostsController extends Controller
     public function destroy($id)
     {
         //
+        /*$post = Post::findOrFail($id);
+        $post->delete();
+
+        Session::flash('user_message', $post->name . ' has been deleted!');
+
+
+        return redirect('/admin/posts');*/
     }
 }

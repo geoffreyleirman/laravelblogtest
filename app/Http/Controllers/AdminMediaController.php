@@ -6,7 +6,7 @@ use App\Models\Photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class AdminMediasController extends Controller
+class AdminMediaController extends Controller
 {
     /**
      * Display a listing of the resource.

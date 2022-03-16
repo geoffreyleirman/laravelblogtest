@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class AdminPostsCategoriesController extends Controller
+class AdminCategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,6 +14,7 @@ class AdminPostsCategoriesController extends Controller
     public function index()
     {
         //
+        /*return view('admin.categories.index', compact('categories'));*/
     }
 
     /**
@@ -24,6 +25,7 @@ class AdminPostsCategoriesController extends Controller
     public function create()
     {
         //
+        return view('admin.categories.create');
     }
 
     /**

@@ -16,8 +16,8 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         //
-        DB::table('categories')->insert(['name'=>'Nieuws']);
+        DB::table('categories')->insert(['name'=>'News']);
         DB::table('categories')->insert(['name'=>'Sport']);
-        DB::table('categories')->insert(['name'=>'Politiek']);
+        DB::table('categories')->insert(['name'=>'Politics']);
     }
 }
