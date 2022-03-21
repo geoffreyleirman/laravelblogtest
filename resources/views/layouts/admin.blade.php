@@ -116,7 +116,7 @@
                     </a>
                     <div class="collapse" id="collapseLayouts4" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="{{route('postcategories.index')}}">All Posts</a>
+                            <a class="nav-link" href="{{route('postcategories.index')}}">All Post Categories</a>
                             <a class="nav-link" href="{{route('postcategories.create')}}">Create PostCategory</a>
                         </nav>
                     </div>

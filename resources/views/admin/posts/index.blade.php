@@ -46,12 +46,12 @@
                         <td>{{$post->created_at->diffForHumans()}}</td>
                         <td>{{$post->updated_at->diffForHumans()}}</td>
                         <td class="d-flex">
-                            <a class="btn btn-info mr-1" href="{{route('posts.show', $post->id)}}">Show</a>
-                            <a class="btn btn-warning mr-1" href="{{route('posts.edit', $post->id)}}">Edit</a>
+                            <a class="btn btn-info mr-1" href="{{route('posts.show', $post->id)}}"><i class="fas fa-eye"></i></a>
+                            <a class="btn btn-warning mr-1" href="{{route('posts.edit', $post->id)}}"><i class="fas fa-edit"></i></a>
                             <form action="{{route('posts.destroy', $post->id)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>
