@@ -19,8 +19,16 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+        Schema::create('category_post', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('post_id');
+            $table->unsignedBigInteger('category_id');
+            $table->timestamps();
+            $table->unique(['post_id', 'category_id']);
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+        });
     }
-
     /**
      * Reverse the migrations.
      *

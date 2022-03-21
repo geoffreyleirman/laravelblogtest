@@ -1,52 +1,30 @@
 @extends('layouts.admin')
-
 @section('content')
-
     <div class="col-12">
-
+        <h1>Create Post</h1>
         @include('includes.form_error')
-
-            <h1 class="mb-3">Create Post</h1>
-
-            {!! Form::open(['method'=>'post', 'action'=>'App\Http\Controllers\AdminPostsController@store', 'files'=>true]) !!}
-
-                <!--Photo-->
-                <div class="form-group mb-3">
-                    {!! Form::label('photo_id', 'Photo:') !!}
-                    {!! Form::file('photo_id',null,['class' =>'form-control']) !!}
-                </div>
-
-                <!--Owner-->
-                <div class="form-group mb-3">
-                    {!! Form::label('name', 'Owner:') !!}
-                    {!! Form::text('name', null,['class' =>'form-control']) !!}
-                </div>
-
-                <!--Category-->
-                <div class="form-group mb-3">
-                    {!! Form::label('Select categories: (CTRL + Click multiple)') !!}
-                    {{--{!! Form::select('categories[]', $categories,null,['class' =>'form-control','multiple'=>'multiple']) !!}--}}
-                </div>
-
-                <!--Title-->
-                <div class="form-group mb-3">
-                    {!! Form::label('title', 'Title:') !!}
-                    {!! Form::text('title', null,['class' =>'form-control']) !!}
-                </div>
-
-                <!--Body-->
-                <div class="form-group mb-3">
-                    {!! Form::label('body', 'Body:') !!}
-                    {!! Form::text('body', null,['class' =>'form-control']) !!}
-                </div>
-
-                <!--Create Button-->
-                <div class="form-group mb-3">
-                    {!! Form::submit('Create Post', ['class'=>'btn btn-primary']) !!}
-                </div>
-
-            {!! Form::close() !!}
-
+        <form action="{{route('posts.store')}}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" class="form-control" placeholder="Title...">
+            </div>
+            <div class="form-group">
+                <label for="category">Category (CTRL + CLICK multiple select)</label>
+                <select name="categories[]" class="form-control custom-select" multiple>
+                    @foreach($categories as $category)
+                        <option value="{{$category->id}}">{{$category->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" name="body" id="body" cols="100%" rows="10" placeholder="Description..."></textarea>
+            </div>
+            <div class="form-group">
+                <input type="file" name="photo_id" id="ChooseFile">
+            </div>
+            <button type="submit" class="btn btn-primary">Add Post</button>
+        </form>
     </div>
 
-@stop
+@endsection

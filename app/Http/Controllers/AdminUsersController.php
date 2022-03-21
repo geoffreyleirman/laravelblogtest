@@ -7,7 +7,6 @@ use App\Http\Requests\UsersEditRequest;
 use App\Http\Requests\UsersRequest;
 use App\Models\Photo;
 use App\Models\Role;
-
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +20,6 @@ class AdminUsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -30,10 +28,14 @@ class AdminUsersController extends Controller
     public function index()
     {
         //
-
-        $users=User::withTrashed()->orderBy('id', 'desc')->paginate(15);
-
+        //$users = User::all(); //eloquent way ORM
+        //$users = User::paginate(15);
+        $users= User::with(['photo', 'roles'])->withTrashed()->paginate(15);
+        //$users = DB::table('users')->get(); //query builder
+        //dd($users);
+        //return view('admin.users.index', ['users' => $users]);
         return view('admin.users.index', compact('users'));
+
     }
 
     /**
@@ -44,8 +46,7 @@ class AdminUsersController extends Controller
     public function create()
     {
         //
-        $roles = Role::pluck('name','id')->all();
-
+        $roles = Role::pluck('name', 'id')->all();
         return view('admin.users.create', compact('roles'));
     }
 
@@ -57,20 +58,17 @@ class AdminUsersController extends Controller
      */
     public function store(UsersRequest $request)
     {
+
         //
-        //dd($request);
-
         $user = new User();
-
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request['password']);
         $user->is_active = $request->is_active;
 
-        /*photo opslaan*/
+        /**photo opslaan**/
         if($file = $request->file('photo_id')){
 
-            //dd($file);
             $name = time() . $file->getClientOriginalName();
             $file->move('img', $name);
             $photo = Photo::create(['file'=>$name]);
@@ -79,11 +77,9 @@ class AdminUsersController extends Controller
 
         $user->save();
 
-        $user->roles()->sync($request->roles, 'false');
+        $user->roles()->sync($request->roles,false);
 
-
-        return redirect('/admin/users');
-
+        return redirect('admin/users');
     }
 
     /**
@@ -107,9 +103,8 @@ class AdminUsersController extends Controller
     {
         //
         $user = User::findOrFail($id);
-        //dd($user);
         $roles = Role::pluck('name', 'id')->all();
-        return view('admin.users.edit', compact('user', 'roles'));
+        return view('admin.users.edit',compact('user', 'roles'));
     }
 
     /**
@@ -122,9 +117,6 @@ class AdminUsersController extends Controller
     public function update(UsersEditRequest $request, $id)
     {
         //
-
-        //dd($request);
-
         $user = User::findOrFail($id);
         if(trim($request->password)==''){
             $input = $request->except('password');
@@ -132,24 +124,19 @@ class AdminUsersController extends Controller
             $input = $request->all;
             $input['password'] = Hash::make($request['password']);
         }
-
-        /*photo overschrijven*/
+        /**photo overschrijven**/
         if($file = $request->file('photo_id')){
 
             $name = time() . $file->getClientOriginalName();
             $file->move('img', $name);
             $photo = Photo::create(['file'=>$name]);
-
-            //dd($input['photo_id']);
             $user->photo_id = $input['photo_id'] = $photo->id;
         }
-
         $user->update($input);
-
-        /*wegschrijven tussentabel met de nieuwe rollen*/
+        /**wegschrijven tussentabel met de nieuwe rollen*/
         $user->roles()->sync($request->roles, true);
         return redirect('admin/users');
-
+        // return redirect->back();
     }
 
     /**
@@ -161,28 +148,17 @@ class AdminUsersController extends Controller
     public function destroy($id)
     {
         //
-        //User::findOrFail($id)->delete();//chaining
+        //User::findOrFail($id)->delete();
         $user = User::findOrFail($id);
         UsersSoftDelete::dispatch($user);
-
         $user->delete();
 
-        Session::flash('user_message', $user->name . ' has been deleted!');
-
-
+        Session::flash('user_message', $user->name . ' was deleted!');
         return redirect('/admin/users');
-    }
 
+    }
     public function restore($id){
-        //dd($id);
-        //User::onlyTrashed()->where('id', $id)->restore();
-
-        $user = User::onlyTrashed()->whereId($id)->first();
-        $user->restore();
-
-        Session::flash('user_message', $user->name . ' has been restored!');
-
+        User::onlyTrashed()->where('id', $id)->restore();
         return redirect('/admin/users');
     }
-
 }

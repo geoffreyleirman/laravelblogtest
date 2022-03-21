@@ -10,9 +10,9 @@ class Category extends Model
 {
     use HasFactory;
     use softDeletes;
-    protected $guarded=[];
+    protected $guarded=['id'];
 
     public function posts(){
-        return $this->hasMany(Post::class);
+        return $this->belongsToMany(Post::class, 'category_post');
     }
 }

@@ -22,7 +22,6 @@ class PostFactory extends Factory
         return [
             //
             'user_id'=> $this->faker->randomElement($users),
-            'category_id'=>$this->faker->numberBetween($min= 1, $max= 2),
             'photo_id'=>$this->faker->numberBetween($min= 1, $max= 2),
             'title'=>$title,
             'body'=>$this->faker->realText($maxNbChars=200, $indexSize=2),
