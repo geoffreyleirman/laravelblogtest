@@ -1,21 +1,21 @@
 @extends('layouts.admin')
 @section('content')
     <div class="col-12">
-        <h1>Create Post</h1>
+        <h1>Edit Post</h1>
         @include('includes.form_error')
         <div class="row">
             <div class="col-6">
                 <form action="{{route('posts.update', $post->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label for="title">Title</label>
-                        <input value="{{$post->title}}" type="text" name="title" id="title" class="form-control"
+                        <input value="{{$post->title}}" type="text" name="title" id="title" class="form-control mt-2"
                                placeholder="Title...">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label for="category">Category (CTRL + CLICK multiple select)</label>
-                        <select name="categories[]" class="form-control custom-select" multiple>
+                        <select name="categories[]" class="form-control mt-2 custom-select" multiple>
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}" @if($post->categories->contains($category->id)) selected @endif>
                                     {{$category->name }}
@@ -23,18 +23,18 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                 <textarea class="form-control" name="body" id="body" cols="100%" rows="10" placeholder="Description...">
                     {{$post->body}}
                 </textarea>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <input type="file" name="photo_id" id="ChooseFile">
                     </div>
                     <button type="submit" class="btn btn-primary">Add Post</button>
                 </form>
             </div>
-            <div class="col-6">
+            <div class="col-5 offset-1">
                 <label for="">Featured Image</label>
                 <img class="img-fluid img-thumbnail"
                      src="{{$post->photo ? asset($post->photo->file) : 'http://via.placeholder.com/400'}}" alt="{{$post->title}}">

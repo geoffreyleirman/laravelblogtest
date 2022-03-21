@@ -5,7 +5,7 @@
             <div class="col-12">
                 <h1>Posts</h1>
                 <form>
-                    <input type="text" name="search" class="form-control bg-gray-300 border-0 small"
+                    <input type="text" name="search" class="form-control bg-light border-0 small"
                            placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                 </form>
             </div>
@@ -37,7 +37,7 @@
                         <td>
                             @if($post->categories)
                                 @foreach($post->categories as $category)
-                                    <span class="badge badge-pill badge-info">{{$category->name}}</span>
+                                    <span class="badge rounded-pill bg-info text-dark">{{$category->name}}</span>
                                 @endforeach
                             @endif
                         </td>
@@ -46,13 +46,28 @@
                         <td>{{$post->created_at->diffForHumans()}}</td>
                         <td>{{$post->updated_at->diffForHumans()}}</td>
                         <td class="d-flex">
-                            <a class="btn btn-info mr-1" href="{{route('posts.show', $post->id)}}"><i class="fas fa-eye"></i></a>
-                            <a class="btn btn-warning mr-1" href="{{route('posts.edit', $post->id)}}"><i class="fas fa-edit"></i></a>
-                            <form action="{{route('posts.destroy', $post->id)}}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                            </form>
+
+                            <div class="row">
+                                <div class="mb-2">
+                                    <a class="btn btn-info" href="{{route('posts.show', $post->id)}}"><i class="fas fa-eye"></i></a>
+
+                                </div>
+                                <div class="mb-2">
+                                    <a class="btn btn-warning" href="{{route('posts.edit', $post->id)}}"><i class="fas fa-edit"></i></a>
+
+                                </div>
+                                <div class="mb-2">
+                                    <form action="{{route('posts.destroy', $post->id)}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+
+
+
+
                         </td>
                     </tr>
                 @endforeach

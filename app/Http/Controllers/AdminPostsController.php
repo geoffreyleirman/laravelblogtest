@@ -46,7 +46,6 @@ class AdminPostsController extends Controller
     public function store(PostsCreateRequest $request)
     {
         //
-        //dd($request);
         $post = new Post();
         $post->title = $request->title;
         $post->body = $request->body;

@@ -10,7 +10,7 @@
                     <div>
                         @if($post->categories)
                             @foreach($post->categories as $category)
-                                <span class="badge badge-pill badge-info">{{$category->name}}</span>
+                                <span class="badge rounded-pill bg-info text-dark">{{$category->name}}</span>
                             @endforeach
                         @endif
                     </div>

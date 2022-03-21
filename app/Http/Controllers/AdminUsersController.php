@@ -28,12 +28,9 @@ class AdminUsersController extends Controller
     public function index()
     {
         //
-        //$users = User::all(); //eloquent way ORM
-        //$users = User::paginate(15);
+
         $users= User::with(['photo', 'roles'])->withTrashed()->paginate(15);
-        //$users = DB::table('users')->get(); //query builder
-        //dd($users);
-        //return view('admin.users.index', ['users' => $users]);
+
         return view('admin.users.index', compact('users'));
 
     }
@@ -148,7 +145,6 @@ class AdminUsersController extends Controller
     public function destroy($id)
     {
         //
-        //User::findOrFail($id)->delete();
         $user = User::findOrFail($id);
         UsersSoftDelete::dispatch($user);
         $user->delete();
