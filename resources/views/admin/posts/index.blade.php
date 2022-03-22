@@ -45,28 +45,36 @@
                         <td>{{$post->body}}</td>
                         <td>{{$post->created_at->diffForHumans()}}</td>
                         <td>{{$post->updated_at->diffForHumans()}}</td>
-                        <td class="d-flex">
+                        <td>
 
-                            <div class="row">
-                                <div class="mb-2">
-                                    <a class="btn btn-info" href="{{route('posts.show', $post->id)}}"><i class="fas fa-eye"></i></a>
-
-                                </div>
-                                <div class="mb-2">
-                                    <a class="btn btn-warning" href="{{route('posts.edit', $post->id)}}"><i class="fas fa-edit"></i></a>
-
-                                </div>
-                                <div class="mb-2">
-                                    <form action="{{route('posts.destroy', $post->id)}}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                                    </form>
+                            <div class="container">
+                                <div class="row row-cols-2">
+                                    <div class="col">
+                                        <div class="mb-2">
+                                            <a class="btn btn-info" href="{{route('posts.show', $post->id)}}"><i class="fas fa-eye"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div>
+                                            <form action="{{route('posts.destroy', $post->id)}}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="mb-2">
+                                            <a class="btn btn-warning" href="{{route('posts.edit', $post->id)}}"><i class="fas fa-edit"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div>
+                                            <a class="btn btn-success ml-1" href="{{route('home.post', $post)}}"><i class="fas fa-eye"></i></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
-
-
 
                         </td>
                     </tr>

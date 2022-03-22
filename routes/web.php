@@ -22,6 +22,8 @@ Route::get('/', function () {
 
 Route::get('/contactformulier', 'App\Http\Controllers\ContactController@create');
 Route::post('/contactformulier', 'App\Http\Controllers\ContactController@store');
+Route::get('/post/{post:slug}', 'App\Http\Controllers\AdminPostsController@post')->name('home.post');
+
 
 //verify zorgt ervoor dat enkel een geverifieerde user wordt toegelaten
 //aan de geautentiseerde routes
@@ -39,7 +41,8 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'admin'], function(){
 Route::group(['prefix' => 'admin', 'middleware'=> ['auth','verified']], function(){
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('homebackend');
     Route::resource('photos',App\Http\Controllers\AdminPhotosController::class);
-    Route::resource('media',App\Http\Controllers\AdminMediaController::class);
+    Route::resource('media',App\Http\Controllers\AdminMediasController::class);
     Route::resource('posts', App\Http\Controllers\AdminPostsController::class);
     Route::resource('postcategories', App\Http\Controllers\AdminPostsCategoriesController::class);
 });
+

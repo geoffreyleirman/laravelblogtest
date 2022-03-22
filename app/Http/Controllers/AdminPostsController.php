@@ -46,6 +46,7 @@ class AdminPostsController extends Controller
     public function store(PostsCreateRequest $request)
     {
         //
+        //dd($request);
         $post = new Post();
         $post->title = $request->title;
         $post->body = $request->body;
@@ -155,4 +156,9 @@ class AdminPostsController extends Controller
         $post->delete();
         return redirect()->route('posts.index');
     }
+
+    public function post(Post $post){
+        return view('post', compact('post'));
+    }
+
 }
