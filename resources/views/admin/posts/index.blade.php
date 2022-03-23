@@ -70,7 +70,7 @@
                                     </div>
                                     <div class="col">
                                         <div>
-                                            <a class="btn btn-success ml-1" href="{{route('home.post', $post)}}"><i class="fas fa-eye"></i></a>
+                                            <a class="btn btn-dark ml-1" href="{{route('home.post', $post)}}"><i class="fas fa-eye"></i></a>
                                         </div>
                                     </div>
                                 </div>

@@ -81,7 +81,9 @@ class AdminPostsCategoriesController extends Controller
     {
         //
         $category = Category::findOrFail($id);
+
         Session::flash('category_message', 'Category ' . $category->name . ' was updated');
+        //$category->slug = Str::slug($request->name,'-');
         $category->update($request->all());
         return redirect()->route('postcategories.index');
     }
@@ -99,5 +101,12 @@ class AdminPostsCategoriesController extends Controller
         Session::flash('category_message', $category->name . ' was deleted!');
         $category->delete();
         return redirect()->route('postcategories.index');
+    }
+    public function category(Category $category){
+        $category->load(['posts.categories','posts.photo']);
+        $posts = $category->posts()->with('categories', 'photo')->paginate(9);
+        $allCategories = Category::all();
+        $slides = $category->posts()->with('categories', 'photo')->latest()->take(4)->get();
+        return view('category', compact('category','posts','allCategories','slides'));
     }
 }

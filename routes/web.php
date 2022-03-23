@@ -16,18 +16,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
-
 });
 
 
 Route::get('/contactformulier', 'App\Http\Controllers\ContactController@create');
 Route::post('/contactformulier', 'App\Http\Controllers\ContactController@store');
 Route::get('/post/{post:slug}', 'App\Http\Controllers\AdminPostsController@post')->name('home.post');
+Route::get('/category/{category:slug}','App\Http\Controllers\AdminPostsCategoriesController@category')->name('category.category');
 
 
 //verify zorgt ervoor dat enkel een geverifieerde user wordt toegelaten
 //aan de geautentiseerde routes
 Auth::routes(['verify'=>true]);
+
 
 
 /***BACKEND ROUTES***/

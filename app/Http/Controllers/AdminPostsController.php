@@ -9,6 +9,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class AdminPostsController extends Controller
 {
@@ -46,9 +47,9 @@ class AdminPostsController extends Controller
     public function store(PostsCreateRequest $request)
     {
         //
-        //dd($request);
         $post = new Post();
         $post->title = $request->title;
+        $post->slug = Str::slug($post->title,'-');
         $post->body = $request->body;
         $post->user_id = Auth::user()->id;
         /**photo opslaan**/
@@ -110,6 +111,7 @@ class AdminPostsController extends Controller
         //opgezochte post wordt vervangen met de nieuwe ingevulde waarden
         //uit het formulier
         $post->title = $request->title;
+        $post->slug = Str::slug($post->title,'-');
         $post->body = $request->body;
         /**photo opslaan**/
         if($file = $request->file('photo_id')){
@@ -158,6 +160,7 @@ class AdminPostsController extends Controller
     }
 
     public function post(Post $post){
+        $post->load(['categories','photo']);
         return view('post', compact('post'));
     }
 

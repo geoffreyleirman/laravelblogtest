@@ -19,9 +19,9 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         //
-        DB::table('categories')->insert(['name'=>'Nieuws','created_at'=>Carbon::now()->format('Y-m-d H:i:s'),'updated_at'=>Carbon::now()->format('Y-m-d H:i:s')]);
-        DB::table('categories')->insert(['name'=>'Sport','created_at'=>Carbon::now()->format('Y-m-d H:i:s'),'updated_at'=>Carbon::now()->format('Y-m-d H:i:s')]);
-        DB::table('categories')->insert(['name'=>'Politiek','created_at'=>Carbon::now()->format('Y-m-d H:i:s'),'updated_at'=>Carbon::now()->format('Y-m-d H:i:s')]);
+        DB::table('categories')->insert(['name'=>'Nieuws','slug'=>'Nieuws','created_at'=>Carbon::now()->format('Y-m-d H:i:s'),'updated_at'=>Carbon::now()->format('Y-m-d H:i:s')]);
+        DB::table('categories')->insert(['name'=>'Sport','slug'=>'Sport','created_at'=>Carbon::now()->format('Y-m-d H:i:s'),'updated_at'=>Carbon::now()->format('Y-m-d H:i:s')]);
+        DB::table('categories')->insert(['name'=>'Politiek','slug'=>'Politiek','created_at'=>Carbon::now()->format('Y-m-d H:i:s'),'updated_at'=>Carbon::now()->format('Y-m-d H:i:s')]);
 
         $categories = Category::all();
         Post::all()->each(function ($post) use ($categories){
