@@ -20,6 +20,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
+        //'role_id',
         'is_active',
         'name',
         'email',
@@ -55,6 +56,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function posts(){
         return $this->hasMany(Post::class);
         // return $this->hasMany('App\Models\Post');
+    }
+
+    public function postcomments(){
+        return $this->hasMany(Comment::class);
     }
 
     public function isAdmin(){

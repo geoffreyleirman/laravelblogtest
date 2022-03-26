@@ -47,6 +47,7 @@ class AdminPostsController extends Controller
     public function store(PostsCreateRequest $request)
     {
         //
+        //dd($request);
         $post = new Post();
         $post->title = $request->title;
         $post->slug = Str::slug($post->title,'-');
@@ -160,7 +161,8 @@ class AdminPostsController extends Controller
     }
 
     public function post(Post $post){
-        $post->load(['categories','photo']);
+        //$post = Post::findOrFail($id);
+        $post->load(['postcomments.user']);
         return view('post', compact('post'));
     }
 

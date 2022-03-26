@@ -234,67 +234,80 @@
             <div class="col-12 col-md-8">
                 <!-- Comment Area Start -->
                 <div class="comment_area section_padding_50 clearfix">
+                    @if(Session::has('postcomment_message'))
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong><i class="fa fa-check-circle"></i> Comment submitted!</strong>
+                            Your comment is awaiting moderation
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
                     <div class="gazette-heading">
                         <h4 class="font-bold">Discussion</h4>
                     </div>
 
                     <ol>
                         <!-- Single Comment Area -->
-                        <li class="single_comment_area">
-                            <div class="comment-wrapper d-md-flex align-items-start">
-                                <!-- Comment Meta -->
-                                <div class="comment-author">
-                                    <img src="{{asset('img/imagesfront/blog-img/25.jpg')}}" alt="">
-                                </div>
-                                <!-- Comment Content -->
-                                <div class="comment-content">
-                                    <h5>John Doe</h5>
-                                    <span class="comment-date font-pt">December 18, 2017</span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum nunc libero, vitae rutrum nunc porta id. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam arcu augue, semper at elementum nec, cursus nec ante.</p>
-                                    <a class="reply-btn" href="#">Reply <i class="fa fa-reply" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
-                            <ol class="children">
+                        @foreach($post->postcomments as $postcomment)
+                            @if($postcomment->is_active == 1)
                                 <li class="single_comment_area">
                                     <div class="comment-wrapper d-md-flex align-items-start">
                                         <!-- Comment Meta -->
                                         <div class="comment-author">
-                                            <img src="{{asset('img/imagesfront/blog-img/25.jpg')}}" alt="">
+                                            <img class="rounded-circle" src="{{$postcomment->user->photo ? $postcomment->user->photo->file : 'http://via.placeholder.com/70x70'}}" alt="">
                                         </div>
                                         <!-- Comment Content -->
                                         <div class="comment-content">
-                                            <h5>John Doe</h5>
-                                            <span class="comment-date text-muted">December 18, 2017</span>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum nunc libero, vitae rutrum nunc porta id. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam arcu augue, semper at elementum nec, cursus nec ante.</p>
-                                            <a class="reply-btn" href="#">Reply <i class="fa fa-reply" aria-hidden="true"></i></a>
+                                            <h5>{{$postcomment->user->name}}</h5>
+                                            <span class="comment-date font-pt">{{$postcomment->created_at->diffForHumans()}}</span>
+                                            <p>{{$postcomment->body}}</p>
+                                            <a class="reply-btn" href="#">Reply <i class="fa fa-reply"
+                                                                                   aria-hidden="true"></i></a>
                                         </div>
                                     </div>
+                                    <ol class="children">
+                                        <li class="single_comment_area">
+                                            <div class="comment-wrapper d-md-flex align-items-start">
+                                                <!-- Comment Meta -->
+                                                <div class="comment-author">
+                                                    <img src="{{asset('img/imagesfront/blog-img/25.jpg')}}" alt="">
+                                                </div>
+                                                <!-- Comment Content -->
+                                                <div class="comment-content">
+                                                    <h5>John Doe</h5>
+                                                    <span class="comment-date text-muted">December 18, 2017</span>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum nunc libero, vitae rutrum nunc porta id. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam arcu augue, semper at elementum nec, cursus nec ante.</p>
+                                                    <a class="reply-btn" href="#">Reply <i class="fa fa-reply" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ol>
                                 </li>
-                            </ol>
-                        </li>
+                            @endif
+                        @endforeach
                     </ol>
                 </div>
                 <!-- Leave A Comment -->
-                <div class="leave-comment-area clearfix">
-                    <div class="comment-form">
-                        <div class="gazette-heading">
-                            <h4 class="font-bold">leave a comment</h4>
+                @auth()
+                    <div class="leave-comment-area clearfix">
+                        <div class="comment-form">
+                            <div class="gazette-heading">
+                                <h4 class="font-bold">leave a comment</h4>
+                            </div>
+                            <!-- Comment Form -->
+                            <form action="{{route('comments.store')}}" method="post">
+                                @csrf
+                                <input type="hidden" name="post_id" value="{{$post->id}}">
+
+                                <div class="form-group">
+                                    <textarea class="form-control" name="body" id="body" cols="30" rows="10" placeholder="Description" required></textarea>
+                                </div>
+                                <button type="submit" class="btn leave-comment-btn">SUBMIT <i class="fa fa-angle-right ml-2"></i></button>
+                            </form>
                         </div>
-                        <!-- Comment Form -->
-                        <form action="#" method="post">
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="contact-name" placeholder="Enter Your Full Name">
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control" id="contact-email" placeholder="Email">
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea>
-                            </div>
-                            <button type="submit" class="btn leave-comment-btn">SUBMIT <i class="fa fa-angle-right ml-2"></i></button>
-                        </form>
                     </div>
-                </div>
+                @endauth
             </div>
         </div>
     </div>

@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('post_comments', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
+            //$table->foreignId('post_id')->index();
             $table->unsignedBigInteger('post_id')->index();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('is_active')->default(0);
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('post_comments');
+        Schema::dropIfExists('comments');
     }
 };
