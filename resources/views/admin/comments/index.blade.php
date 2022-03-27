@@ -39,15 +39,16 @@
                                         </button>
                                     @endif
                                     <a href="{{route('home.post', $comment->post->slug)}}" class="btn btn-info mr-1"><i class="fas fa-eye">Post</i></a>
-                                    <div class="form-group">
-                                        <a href="" class="btn btn-success mr-1"><i class="fas fa-eye">Replies</i></a>
-                                    </div>
 
-                                    {!! Form::open(['method'=>'DELETE','action'=>['App\Http\Controllers\AdminPostComments@destroy',$comment->id]]) !!}
+<!--                                    <div class="form-group">-->
+                                        <a href="" class="btn btn-success mr-1"><i class="fas fa-eye">Replies</i></a>
+<!--                                    </div>-->
+
+                                    {{--{!! Form::open(['method'=>'DELETE','action'=>['App\Http\Controllers\AdminPostComments@destroy',$comment->id]]) !!}
                                     <div class="form-group">
                                         {!! Form::button('<i class="fas fa-trash"></i>', ['type'=>'submit', 'class'=>'btn btn-danger mr-1']) !!}
                                     </div>
-                                    {!! Form::close() !!}
+                                    {!! Form::close() !!}--}}
                                 </form>
                             </div>
                         </td>

@@ -161,7 +161,6 @@ class AdminPostsController extends Controller
     }
 
     public function post(Post $post){
-        //$post = Post::findOrFail($id);
         $post->load(['postcomments.user']);
         return view('post', compact('post'));
     }

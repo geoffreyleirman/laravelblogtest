@@ -40,7 +40,6 @@ class AdminPostCommentsController extends Controller
     public function store(Request $request)
     {
         //
-        //dd($request);
         if($user = Auth::user()){
             $data =[
                 'post_id'=>$request->post_id,
@@ -105,8 +104,8 @@ class AdminPostCommentsController extends Controller
     public function destroy($id)
     {
         //
-        Comment::findOrFail($id)->delete();
-        return redirect()->back();
+        /*Comment::findOrFail($id)->delete();
+        return redirect()->back();*/
     }
 
 }

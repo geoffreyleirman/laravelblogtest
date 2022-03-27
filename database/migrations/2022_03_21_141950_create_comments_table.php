@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            //$table->foreignId('post_id')->index();
             $table->unsignedBigInteger('post_id')->index();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('is_active')->default(0);
