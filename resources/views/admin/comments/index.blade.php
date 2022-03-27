@@ -38,10 +38,10 @@
                                             <i class="fas fa-lock"></i>
                                         </button>
                                     @endif
-                                    <a href="{{route('home.post', $comment->post->slug)}}" class="btn btn-info mr-1"><i class="fas fa-eye">Post</i></a>
+                                    <a href="{{route('home.post', $comment->post->slug)}}" class="btn btn-info mr-1"><i class="fas fa-sticky-note"></i></i></a>
 
 <!--                                    <div class="form-group">-->
-                                        <a href="" class="btn btn-success mr-1"><i class="fas fa-eye">Replies</i></a>
+                                        <a href="" class="btn btn-success mr-1"><i class="fas fa-comment-alt"></i></i></a>
 <!--                                    </div>-->
 
                                     {{--{!! Form::open(['method'=>'DELETE','action'=>['App\Http\Controllers\AdminPostComments@destroy',$comment->id]]) !!}
